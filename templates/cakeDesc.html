@@ -1,0 +1,399 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css\style.css' %}" rel="stylesheet">
+
+    {% comment %} font links {% endcomment %}
+
+    <link href='https://fonts.googleapis.com/css?family=Carattere' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Suez One' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>  
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <title>Cake Details</title>
+</head>
+<body style="background-image: url({% static 'images\background.png' %});background-size:100%;">
+    {% comment %} Nav bar {% endcomment %}
+
+    <nav class="navbar navbar-expand-lg navbar-light shadow-sm align-items-center float-end" id="nav">
+      <img class="nav-item ms-5" src="{% static 'images\logo.png' %}" width="15%" alt="">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse navbar-light" id="navbarCollapse">
+        <div class="navbar-nav ms-auto mx-lg-auto mt-lg-3">
+          <a href="Home.html" class="nav-item nav-link ms-2 active h5" id="foot">Home</a>
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle h5 ms-2" data-bs-toggle="dropdown" id="foot">Menu</a>
+            <div class="dropdown-menu" style="background-color:#e0abd840" >
+              <a href="renderBirthdayMenu" class="dropdown-item" >Birthday Cakes</a>
+              <a href="renderAnneversaryMenu" class="dropdown-item">Anniversary Cakes</a>
+              <a href="renderThemeMenu" class="dropdown-item">Theme Cakes</a>
+              <a href="renderCustomCakeForm" class="dropdown-item">Customized Cakes</a>
+  
+              <li>
+                <a class="dropdown-item" href="#" style="background-color:#e0abd840">Backery Products &raquo; </a>
+                <ul class="dropdown-menu dropdown-submenu">
+                  <li>
+                    <a class="dropdown-item" href="renderCookieMenu" style="background-color:#e0abd840">Cookies</a>
+                    <a class="dropdown-item" href="renderCookieMenu" style="background-color:#e0abd840">Pastries</a>
+  
+                  </li>
+                </ul>
+              </li>
+            </div>
+          </div>      
+          <a href="renderLogin" class="nav-item nav-link  h5 ms-2" id="foot">Login</a>
+          <a href="renderSignup" class="nav-item nav-link h5 ms-2 " id="foot">Sign up</a>
+          <a href="renderAboutus" class="nav-item nav-link  h5 ms-2" id="foot">About us</a>
+          <a href="#" class="nav-item nav-link  h5 ms-2" id="foot">Blog</a>
+          <a href="#" class="nav-item nav-link  h5 ms-2" id="foot">Decorating tutorials</a>
+  
+          {% comment %} <a href="renderCart" class="nav-item nav-link h4 ms-3" id="foot">
+            <i class="bi bi-cart"></i> </a> {% endcomment %}
+            <div class="mt-1 ms-2 me-3">
+              <button class="btn btn-light border border-dark w-100 rounded-pill " onclick="ok()" id="foot">
+                <i class="fa fa-map-marker me-1" style="font-size: 18px;"></i>
+                Choose your delivery location
+              </button>
+            </div>
+        {% comment %} user profile {% endcomment %}
+        {% if user.is_authenticated %}
+        <li class="nav-item dropdown" id="profile">
+          <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user-circle ms-lg-2 mt-1" aria-hidden="true" style="color:#2E6565;font-size:20px"> Hello,<b>{{ request.user }}</b></i></a>
+          <div class="dropdown-menu">
+            <a href="renderMyOrders" class="dropdown-item">My Orders</a>
+            <a href="#" class="dropdown-item">My Account</a>
+            <a href="renderCart" class="dropdown-item">My Cart</a>
+            <a href="logout" class="dropdown-item">Logout</a>
+          </div>
+        </li>
+        {% else %}
+        <li class="nav-item dropdown" id="profile">
+          <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user-circle ms-lg-2 mt-1" aria-hidden="true" style="color:#2E6565;font-size:20px"> Hello, <b>Guest</b></i></a>
+          <div class="dropdown-menu">
+            <a href="logout" class="dropdown-item">Log Out</a>
+          </div>
+        </li>
+        {% endif %}
+        </div>
+  
+      </div>
+    </nav><br><br><br><br><br><br>
+    {% comment %} Navbar End {% endcomment %}
+{% for cake in birthdaycake %}
+    <div class="container justify-content-center shadow-lg p-5" style="background-color:#fcfcfc6f;border-radius:15px">
+        <div class="row">
+            <div class="col-sm-6">
+                <img src="{{ cake.Cake_Image.url }}" class="mt-5" width="80%" alt="">
+            </div>
+        
+            <div class="col-6 p-4">
+                <h3 class="mt-4" style="font-family: 'Signika'">{{ cake.Cake_Name }}</h3>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star"></i>
+                        <i style="font-family: 'Signika'">{{ cake.Cake_Review }} Reviews</i>
+                    </div>
+                </div>
+                <div id="result" style="font-size: 20px;" class="mt-2">
+                    <p style="font-family: 'Signika'">Rs.{{ cake.Cake_Price }}.00</p>
+                </div>
+                {% if cake.category <= 3 %}
+                <div class="mt-2">
+                    <h6>Size :</h6>
+                    <button class="btn btn-light" id="halfKg" onclick="halfkg()" style="border:2px black solid; padding-left:17px;padding-right:17px;font-family: 'Signika'">1/2 Kg</button>
+                    <button class="btn btn-light" id="oneKg" onclick="oneKg()" style="border:2px black solid; padding-left:20px;padding-right:20px;font-family: 'Signika'">1 Kg</button>
+                    <button class="btn btn-light" id="twoKg" onclick="THOkg()" style="border:2px black solid; padding-left:20px;padding-right:20px;font-family: 'Signika'">2 Kg</button>
+                    <button class="btn btn-light" id="fiveKg" onclick="FOkg()" style="border:2px black solid; padding-left:20px;padding-right:20px;font-family: 'Signika'">5 Kg</button>
+                </div>
+                {% else %}
+                <div class="mt-2">
+                  <h6>Size :</h6>
+                  <button class="btn btn-light" id="small" onclick="small()" style="border:2px black solid; padding-left:17px;padding-right:17px;font-family: 'Signika'">Small</button>
+                  <button class="btn btn-light" id="medium" onclick="medium()" style="border:2px black solid; padding-left:20px;padding-right:20px;font-family: 'Signika'">Medium</button>
+                  <button class="btn btn-light" id="large" onclick="large()" style="border:2px black solid; padding-left:20px;padding-right:20px;font-family: 'Signika'">Large</button>
+              </div>
+                {% endif %}
+                <form method="POST" action="addToCart">
+                    {% csrf_token %}
+                    <input type="text" name="name" value="{{ cake.Cake_Name }}" hidden>
+                    <input type="text" name="price" id="price" hidden>
+                    <input type="text" name="qty" id="qty" hidden>
+                    <input type="text" name="size" id="size" hidden>
+                <div class="dropdown mt-3">
+                    <p style="font-family: 'Signika'">Quantity:</p>
+                    <select id="c" onchange="calculate()" class="btn btn-light" style="border:2px #000 solid" required>
+                        <option selected style="color: rgba(0, 0, 0, 0.482);font-family: 'Signika'">select</option>
+                        <option  style="font-family: 'Signika'">1</option>
+                        <option style="font-family: 'Signika'">2</option>
+                        <option style="font-family: 'Signika'">3</option>
+                        <option style="font-family: 'Signika'">4</option>
+                    </select>
+                    {% if user.is_authenticated%}
+                    <input type="submit" class="btn btn-warning ms-2 w-75" value="Add to Cart" onclick="displayAlert()" style="font-family: 'Signika'"></button>
+                    {% else %}
+                    <a href="renderLogin" class="btn btn-warning ms-2 w-75 text-dark">Add to Cart</a>
+                    {% endif %}
+                  </form>
+                </div>
+                <p class="mt-4" style="font-family: 'Signika'">Cream and Chocolate all Over the cake Outside and Chocolate craen inside. Freshly made Chocolate Delight cake with melted Chocolate inside is everyone's favourite.</p>
+            </div>
+            {% endfor %}
+          </div>
+    </div>
+
+
+    {% comment %} footer {% endcomment %}
+    <footer class="shadow-lg mt-5" style="background-color: #d1e9e755;">
+      <div class="container p-4">
+        <div class="row">
+          <div class="col-lg-6 col-md-4 mb-4 mb-md-0">
+            <img src="{% static 'images\logo.png' %}" alt="not found" width="50%" class="ml-5">
+          </div>
+          <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+            <ul class="list-unstyled mb-0">
+              <li>
+                <a href="#!" id="foot">Careers</a>
+              </li>
+              <li>
+                <a href="teach.html" id="foot">Our Services</a>
+              </li>
+              <li>
+                <a href="#!" id="foot">Get the app</a>
+              </li>
+              <li>
+                <a href="#!" id="foot">Contact us</a>
+              </li>
+              <li>
+                <a href="#!" id="foot">About us</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+            <ul class="list-unstyled">
+              <li>
+                <a href="#!" id="foot">Help and support</a>
+              </li>
+              <li>
+                <a href="#!" id="foot">Cookie settings</a>
+              </li>
+              <li>
+                <a href="#!" id="foot">Blog</a>
+              </li>
+              <li>
+                <a href="#!" id="foot">Terms</a>
+              </li>
+              <li>
+                <a href="#!" id="foot">Privacy policy</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+            <ul class="list-unstyled">
+              <li>
+                <a href="#!" id="foot">Help and support</a>
+              </li>
+              <li>
+                <a href="#!" id="foot">Cookie settings</a>
+              </li>
+              <li>
+                <a href="#!" id="foot">Blog</a>
+              </li>
+              <li>
+                <a href="#!" id="foot">Terms</a>
+              </li>
+              <li>
+                <a href="#!" id="foot">Privacy policy</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="container text-center" style="margin-left: 210px;">
+            <a href=""><i class="bi bi-whatsapp h1" id="foot"></i></a>
+            <a href=""><i class="bi bi-instagram h1 ms-3" id="foot"></i></a>
+            <a href=""><i class="bi bi-facebook h1 ms-3" id="foot"></i></a>
+            <a href=""><i class="bi bi-twitter h1 ms-3" id="foot"></i></a>
+        </div> -->
+      <div class="text-center p-3" id="foot">
+        © 2022 bakingbarons,inc
+      </div>
+    </footer>
+</body>
+<script>
+    var inp = document.getElementById("price");
+    var qty = document.getElementById("qty");
+
+    function calculate(){
+        var q = document.getElementById("c").value;
+        qty.value = q;
+    }
+    function halfkg(){
+        document.getElementById("result").innerHTML = "Rs.300.00";
+        inp.value = "300"
+        var size = document.getElementById("size");
+        size.value = "1/2 kg"
+
+
+        document.getElementById("halfKg").style.borderColor="rgb(220, 18, 136)"
+        document.getElementById("halfKg").style.color="rgb(220, 18, 136)"
+
+        document.getElementById("oneKg").style.borderColor="#000"
+        document.getElementById("oneKg").style.color="#000"
+
+        document.getElementById("twoKg").style.borderColor="#000"
+        document.getElementById("twoKg").style.color="#000"
+
+        document.getElementById("fiveKg").style.borderColor="#000"
+        document.getElementById("fiveKg").style.color="#000"
+        
+        
+    }
+    function oneKg(){
+        document.getElementById("result").innerHTML ="Rs.500.00";
+        inp.value = "500"
+
+        var size = document.getElementById("size");
+        size.value = "1 kg"
+        document.getElementById("halfKg").style.borderColor="#000"
+        document.getElementById("halfKg").style.color="#000"
+
+        document.getElementById("oneKg").style.borderColor="rgb(220, 18, 136)"
+        document.getElementById("oneKg").style.color="rgb(220, 18, 136)"
+
+        document.getElementById("twoKg").style.borderColor="#000"
+        document.getElementById("twoKg").style.color="#000"
+
+        document.getElementById("fiveKg").style.borderColor="#000"
+        document.getElementById("fiveKg").style.color="#000"
+    }
+    function THOkg(){
+        document.getElementById("result").innerHTML ="Rs.700.00";
+        inp.value = "700"
+
+        var size = document.getElementById("size");
+        size.value = "2 kg"
+        document.getElementById("halfKg").style.borderColor="#000"
+        document.getElementById("halfKg").style.color="#000"
+
+        document.getElementById("oneKg").style.borderColor="#000"
+        document.getElementById("oneKg").style.color="#000"
+
+        document.getElementById("twoKg").style.borderColor="rgb(220, 18, 136)"
+        document.getElementById("twoKg").style.color="rgb(220, 18, 136)"
+
+        document.getElementById("fiveKg").style.borderColor="#000"
+        document.getElementById("fiveKg").style.color="#000"
+    }
+    function FOkg(){
+        document.getElementById("result").innerHTML ="Rs.2500.00";
+        inp.value = "2500"
+
+        var size = document.getElementById("size");
+        size.value = "5 kg"
+        document.getElementById("halfKg").style.borderColor="#000"
+        document.getElementById("halfKg").style.color="#000"
+
+        document.getElementById("oneKg").style.borderColor="#000"
+        document.getElementById("oneKg").style.color="#000"
+
+        document.getElementById("twoKg").style.borderColor="#000"
+        document.getElementById("twoKg").style.color="#000"
+
+        document.getElementById("fiveKg").style.borderColor="rgb(220, 18, 136)"
+        document.getElementById("fiveKg").style.color="rgb(220, 18, 136)"
+    }
+
+    function small(){
+      document.getElementById("result").innerHTML = "Rs.50.00";
+      inp.value = "50"
+      var size = document.getElementById("size");
+      size.value = "small"
+
+      document.getElementById("small").style.borderColor="rgb(220, 18, 136)"
+      document.getElementById("small").style.color="rgb(220, 18, 136)"
+
+      document.getElementById("medium").style.borderColor="#000"
+      document.getElementById("medium").style.color="#000"
+
+      document.getElementById("large").style.borderColor="#000"
+      document.getElementById("large").style.color="#000"
+    }
+
+    function medium(){
+      document.getElementById("result").innerHTML = "Rs.70.00";
+      inp.value = "70"
+      var size = document.getElementById("size");
+      size.value = "medium"
+
+      document.getElementById("small").style.borderColor="#000"
+      document.getElementById("small").style.color="#000"
+
+      document.getElementById("medium").style.borderColor="rgb(220, 18, 136)"
+      document.getElementById("medium").style.color="rgb(220, 18, 136)"
+
+      document.getElementById("large").style.borderColor="#000"
+      document.getElementById("large").style.color="#000"
+    }
+
+    function large(){
+      document.getElementById("result").innerHTML = "Rs.90.00";
+      inp.value = "90"
+      var size = document.getElementById("size");
+      size.value = "large"
+
+      document.getElementById("small").style.borderColor="#000"
+      document.getElementById("small").style.color="#000"
+
+      document.getElementById("medium").style.borderColor="#000"
+      document.getElementById("medium").style.color="#000"
+
+      document.getElementById("large").style.borderColor="rgb(220, 18, 136)"
+      document.getElementById("large").style.color="rgb(220, 18, 136)"
+    }
+
+    function displayAlert(){
+      alert('Added to cart')
+    }
+      function ok(){
+          swal("Enter Your Pin Code", {
+        content: "input",
+      })
+      .then((value) => {
+        var res = parseInt(value)
+    
+        var pincodelist = [411028, 411013, 411022, 100000, 412105, 411042, 411016, 412201, 412214, 411058]
+          for (let i = 0; i < pincodelist.length; i++) {
+            if (res == pincodelist[i]){
+              swal("Good News!", "We Deliver at "+res+"!", "success");
+              break;
+            }
+            else{
+              swal("Opps!", "We Dont Deliver at "+res+"!", "error");
+            }
+          }
+      })
+    }
+</script>
+</html>

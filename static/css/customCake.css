@@ -1,0 +1,178 @@
+#foot{
+    text-decoration:none; 
+    color: #2E6565;
+    font-family: 'Suez One', sans-serif;
+}
+#body{
+    background-image: url('background.png');
+    background-size: 100%;
+}
+#card {
+    z-index: 0;
+    background-color: #eceff1;
+    padding-bottom: 20px;
+    margin-top: 90px;
+    margin-bottom: 90px;
+    border-radius: 10px;
+}
+
+.top {
+    padding-top: 40px;
+    padding-left: 13% !important;
+    padding-right: 13% !important;
+}
+
+/* Icon progressbar */
+
+#progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: #455a64;
+    padding-left: 0;
+    margin-top: 30px;
+}
+
+#progressbar li {
+    list-style-type: none;
+    font-size: 13px;
+    width: 25%;
+    float: left;
+    position: relative;
+    font-weight: 400;
+}
+
+#progressbar .step0::before {
+    font-family: FontAwesome;
+    content: '\f10c';
+    color: #fff;
+}
+
+#progressbar li::before {
+    width: 40px;
+    height: 40px;
+    line-height: 45px;
+    display: block;
+    font-size: 20px;
+    background: #c5cae9;
+    border-radius: 50%;
+    margin: auto;
+    padding: 0;
+}
+
+/* Progressbar connector */
+#progressbar li::after {
+    content: '';
+    width: 100%;
+    height: 12px;
+    background-color: #c5cae9;
+    position: absolute;
+    top: 16px;
+    left: 0;
+    z-index: -1;
+}
+
+#progressbar li:last-child::after {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    position: absolute;
+    left: -50%;
+}
+
+#progressbar li:nth-child(2)::after,
+#progressbar li:nth-child(3)::after {
+    left: -50%;
+}
+
+#progressbar li:first-child::after {
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    position: absolute;
+    left: 50%;
+}
+
+/* Color number of the step and the connect tor before it */
+
+#progressbar li.active::before,
+#progressbar li.active::after {
+    background-color: #651fff;
+}
+
+#progressbar li.active::before {
+    font-family: FontAwesome;
+    content: '\f00c';
+}
+
+.icon {
+    width: 60px;
+    height: 60px;
+    margin-right: 15px;
+}
+
+.icon-content {
+    padding-bottom: 20px;
+}
+
+@media screen and (max-width: 992px) {
+    .icon-content {
+        width: 50%;
+    }
+}
+#img{
+ position:absolute;
+ width: 50%;
+bottom: 1px;
+top: 48px;
+right: 700px;
+}
+#menu{
+    background-image: url("background.png");
+    background-size: 100%;
+}
+#btn2{
+    background: linear-gradient(to bottom right,#ff8800d5,#ff0040bf);
+    font-size: 20px;
+    color: white;
+    margin-left: 150px;
+}
+#btn{
+    background: linear-gradient(to bottom right,#ff8800d5,#ff0040bf);
+}
+#form{
+    border-radius: 10px;
+    height: 36pt;
+    box-shadow: 3px 5px 10px #00000064; 
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
+}
+#search{
+    width: 450px;
+}
+#nav{
+    background-color: #d1e9e755;
+    font-family: 'Suez One', sans-serif;
+}
+#container{
+    background-image: url("background.png");
+    background-size: 100%;
+}
+body{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    
+    background-size: 100%;
+    
+}
+.dropdown-menu li {
+    position: relative;
+    }
+    .dropdown-menu .dropdown-submenu {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: -7px;
+    }
+    .dropdown-menu .dropdown-submenu-left {
+    right: 100%;
+    left: auto;
+    }
+    .dropdown-menu > li:hover > .dropdown-submenu {
+    display: block;
+    }

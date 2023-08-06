@@ -1,0 +1,259 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+
+    {% comment %} font links {% endcomment %}
+    <link href='https://fonts.googleapis.com/css?family=Carattere' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Suez One' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link href="{% static 'css\style.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+</head>
+
+<body style="background-image: url({% static 'images\background.png' %});" >
+    <nav class="navbar navbar-expand-lg navbar-light shadow-sm align-items-center float-end" id="nav">
+        <img class="nav-item ms-5" src="{% static 'images\logo.png' %}" width="15%" alt="">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse navbar-light" id="navbarCollapse">
+          <div class="navbar-nav ms-auto mx-lg-auto mt-lg-3">
+            <a href="/" class="nav-item nav-link ms-2 active h5" id="foot">Home</a>
+            <div class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle h5 ms-2" data-bs-toggle="dropdown" id="foot">Menu</a>
+              <div class="dropdown-menu" style="background-color:#e0abd840" >
+                <a href="renderBirthdayMenu" class="dropdown-item" >Birthday Cakes</a>
+                <a href="renderAnneversaryMenu" class="dropdown-item">Anniversary Cakes</a>
+                <a href="renderThemeMenu" class="dropdown-item">Theme Cakes</a>
+                <a href="renderCustomCakeForm" class="dropdown-item">Customized Cakes</a>
+    
+                <li>
+                  <a class="dropdown-item" href="#" style="background-color:#e0abd840">Backery Products &raquo; </a>
+                  <ul class="dropdown-menu dropdown-submenu">
+                    <li>
+                      <a class="dropdown-item" href="renderCookieMenu" style="background-color:#e0abd840">Cookies</a>
+                      <a class="dropdown-item" href="renderCookieMenu" style="background-color:#e0abd840">Pastries</a>
+    
+                    </li>
+                  </ul>
+                </li>
+              </div>
+            </div>      
+            <a href="renderLogin" class="nav-item nav-link  h5 ms-2" id="foot">Login</a>
+            <a href="renderSignup" class="nav-item nav-link h5 ms-2 " id="foot">Sign up</a>
+            <a href="renderAboutus" class="nav-item nav-link  h5 ms-2" id="foot">About us</a>
+            <a href="#" class="nav-item nav-link  h5 ms-2" id="foot">Blog</a>
+            <a href="#" class="nav-item nav-link  h5 ms-2" id="foot">Decorating tutorials</a>
+    
+            {% comment %} <a href="renderCart" class="nav-item nav-link h4 ms-3" id="foot">
+              <i class="bi bi-cart"></i> </a> {% endcomment %}
+              <div class="mt-1 ms-2 me-3">
+                <button class="btn btn-light border border-dark w-100 rounded-pill " onclick="ok()" id="foot">
+                  <i class="fa fa-map-marker me-1" style="font-size: 18px;"></i>
+                  Choose your delivery location
+                </button>
+              </div>
+          {% comment %} user profile {% endcomment %}
+          {% if user.is_authenticated %}
+          <li class="nav-item dropdown" id="profile">
+            <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user-circle ms-lg-2 mt-1" aria-hidden="true" style="color:#2E6565;font-size:20px"> Hello,<b>{{ request.user }}</b></i></a>
+            <div class="dropdown-menu">
+              <a href="renderMyOrders" class="dropdown-item">My Orders</a>
+              <a href="#" class="dropdown-item">My Account</a>
+              <a href="renderCart" class="dropdown-item">My Cart</a>
+              <a href="logout" class="dropdown-item">Logout</a>
+            </div>
+          </li>
+          {% else %}
+          <li class="nav-item dropdown" id="profile">
+            <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user-circle ms-lg-2 mt-1" aria-hidden="true" style="color:#2E6565;font-size:20px"> Hello, <b>Guest</b></i></a>
+            <div class="dropdown-menu">
+              <a href="logout" class="dropdown-item">Log Out</a>
+            </div>
+          </li>
+          {% endif %}
+          </div>
+    
+        </div>
+      </nav>
+    <div id="container">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 ms-5">
+                    <p class="mt-5" style="font-size: 30px;font-family: 'Suez One';">BAKING WISHES COME TRUE!</p>
+                    <p class="fs-5" style="font-family: 'Signika'">
+                        We love to bake. We provide the highest quality bakery products made with fresh ingredients. Our
+                        team is working delicately to provide the best service to our customers at every step of the
+                        way. From last few years, we are constantly working to enhance our services towards our
+                        customers. Now, we offer all kind of special cakes and bakery products on each occasion. We
+                        guarantee the best quality products at on-time delivery.
+                    </p>
+                    <p class="mt-5" style="font-size: 30px;font-family: 'Suez One';">YEAR ROUND OCCASIONS</p>
+                    <ul class="mt-3" style="font-size: 20px;" >
+                        <li style="font-family: 'Signika'">Birthdays</li>
+                        <li style="font-family: 'Signika'">Love/ Anniversary</li>
+                        <li style="font-family: 'Signika'">Thank You</li>
+                        <li style="font-family: 'Signika'">Congratulations</li>
+                        <li style="font-family: 'Signika'">Best Wishes</li>
+                        <li style="font-family: 'Signika'">Get Well soon</li>
+                    </ul>
+                    <p style="font-size: 30px;font-family: 'Suez One';">AVAILABLE ON A SEASONAL BASIS:</p>
+                    <ul class="mt-3" style="font-size: 20px;">
+                        <li style="font-family: 'Signika'">Mother's Day</li>
+                        <li style="font-family: 'Signika'">Father's Day</li>
+                        <li style="font-family: 'Signika'">Christmas</li>
+                    </ul>
+                </div>
+                <div class="col-5">
+                    <img src="{% static 'images/aboutus.png' %}" class="mt-5" width="90%" alt="">
+                </div>
+            </div>
+            <div class="row mb-5 ms-5 me-5">
+                <p style="font-size: 35px;font-family: 'Suez One';" class="mt-5 text-center">Contact Us..</p>
+                <div class="col-md-5 mt-3">
+                    <form>
+                        <div class="d-flex flex-row align-items-center mb-2">
+                            <div class="form-outline flex-fill mb-0 mt-3">
+                                <input type="numbers" id="form" class="form-control" placeholder="Enter name"
+                                    style="border: 0.4px solid #000; box-shadow: 3px 5px 10px #00000064;font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Seg oe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; padding-left: 20px;"
+                                    name='Name' required />
+                            </div>
+                        </div>
+                        <div class="form-outline flex-fill mb-0 mt-4">
+                            <input type="email" id="form" class="form-control border-dark" placeholder="Enter Email"
+                                style="border: 0.4px solid #000; box-shadow: 3px 5px 10px #00000064; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; padding-left: 20px;"
+                                name='email' required />
+                        </div>
+                        <div class="d-flex flex-row align-items-center mb-2">
+                            <div class="form-outline flex-fill mb-0 mt-4">
+                                <input type="numbers" id="form" class="form-control" placeholder="Enter subject"
+                                    style="border: 0.4px solid #000; box-shadow: 3px 5px 10px #00000064;font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; padding-left: 20px;"
+                                    name='Subject' required />
+                            </div>
+                        </div>
+                        <div class="form-group purple-border mt-4" id="form">
+                            <textarea
+                                style="border: 0.4px solid #000; box-shadow: 3px 5px 10px #00000064;font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; padding-left: 20px;border-radius: 10px;"
+                                placeholder="message" class="form-control" id="exampleFormControlTextarea4"
+                                rows="5"></textarea>
+                        </div>
+                    </form>
+                    <div class="mt-5 text-center">
+                        <a href="">
+                            <button class="btn btn-primary mt-5 mb-3" style="width: 30%;" id="descbtn">Send</button></a>
+                    </div>
+                </div>
+                <div class="col-1"></div>
+                <div class="col-md-6">
+                    <div class="map_main">
+                        <div class="map-responsive mt-3">
+                            <iframe
+                                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&amp;q=Eiffel+Tower+Paris+France"
+                                width="400" height="400" frameborder="0" style="border:0; width: 100%;"
+                                allowfullscreen=""></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- contact section end -->
+    </div>
+    <footer class="shadow-lg" style="background-color: #d1e9e755;">
+        <div class="container p-4">
+            <div class="row">
+                <div class="col-lg-6 col-md-4 mb-4 mb-md-0">
+                    <img src="{% static 'images/logo.png' %}" alt="not found" width="50%" class="ml-5">
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="#!" id="foot">Careers</a>
+                        </li>
+                        <li>
+                            <a href="teach.html" id="foot">Our Services</a>
+                        </li>
+                        <li>
+                            <a href="#!" id="foot">Get the app</a>
+                        </li>
+                        <li>
+                            <a href="#!" id="foot">Contact us</a>
+                        </li>
+                        <li>
+                            <a href="#!" id="foot">About us</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!" id="foot">Help and support</a>
+                        </li>
+                        <li>
+                            <a href="#!" id="foot">Cookie settings</a>
+                        </li>
+                        <li>
+                            <a href="#!" id="foot">Blog</a>
+                        </li>
+                        <li>
+                            <a href="#!" id="foot">Terms</a>
+                        </li>
+                        <li>
+                            <a href="#!" id="foot">Privacy policy</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!" id="foot">Help and support</a>
+                        </li>
+                        <li>
+                            <a href="#!" id="foot">Cookie settings</a>
+                        </li>
+                        <li>
+                            <a href="#!" id="foot">Blog</a>
+                        </li>
+                        <li>
+                            <a href="#!" id="foot">Terms</a>
+                        </li>
+                        <li>
+                            <a href="#!" id="foot">Privacy policy</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="container text-center" style="margin-left: 210px;">
+          <a href=""><i class="bi bi-whatsapp h1" id="foot"></i></a>
+          <a href=""><i class="bi bi-instagram h1 ms-3" id="foot"></i></a>
+          <a href=""><i class="bi bi-facebook h1 ms-3" id="foot"></i></a>
+          <a href=""><i class="bi bi-twitter h1 ms-3" id="foot"></i></a>
+      </div> -->
+        <div class="text-center p-3" id="foot">
+            © 2022 bakingbarons,inc
+        </div>
+    </footer>
+    </div>
+</body>
+
+</html>

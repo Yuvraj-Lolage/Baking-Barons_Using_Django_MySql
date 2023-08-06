@@ -1,0 +1,252 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Decoration Tutorial</title>
+
+  {% comment %} Font links {% endcomment %}
+  <link href='https://fonts.googleapis.com/css?family=Suez One' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Carattere' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
+
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="script.js"></script>
+  <link href="{% static 'css\style.css' %}" rel="stylesheet">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+</head>
+
+<body style="background-image: url({% static 'images/background.png' %});background-size: 100%;">
+  <nav class="navbar navbar-expand-lg navbar-light shadow-sm align-items-center float-end" id="nav">
+    <img class="nav-item ms-5" src="{% static 'images/logo.png' %}" width="15%" alt="">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse navbar-light" id="navbarCollapse">
+      <div class="navbar-nav ms-auto mx-lg-auto mt-lg-3">
+        <a href="/" class="nav-item nav-link ms-2 active h5" id="foot">Home</a>
+        <div class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle h5 ms-2" data-bs-toggle="dropdown" id="foot">Menu</a>
+          <div class="dropdown-menu" style="background-color:#e0abd840" >
+            <a href="renderBirthdayMenu" class="dropdown-item" >Birthday Cakes</a>
+            <a href="renderAnneversaryMenu" class="dropdown-item">Anniversary Cakes</a>
+            <a href="renderThemeMenu" class="dropdown-item">Theme Cakes</a>
+            <a href="renderCustomCakeForm" class="dropdown-item">Customized Cakes</a>
+
+            <li>
+              <a class="dropdown-item" href="#" style="background-color:#e0abd840">Backery Products &raquo; </a>
+              <ul class="dropdown-menu dropdown-submenu">
+                <li>
+                  <a class="dropdown-item" href="renderCookieMenu" style="background-color:#e0abd840">Cookies</a>
+                  <a class="dropdown-item" href="renderCookieMenu" style="background-color:#e0abd840">Pastries</a>
+
+                </li>
+              </ul>
+            </li>
+          </div>
+        </div>      
+        <a href="renderLogin" class="nav-item nav-link  h5 ms-2" id="foot">Login</a>
+        <a href="renderSignup" class="nav-item nav-link h5 ms-2 " id="foot">Sign up</a>
+        <a href="renderAboutus" class="nav-item nav-link  h5 ms-2" id="foot">About us</a>
+        <a href="#" class="nav-item nav-link  h5 ms-2" id="foot">Blog</a>
+        <a href="renderDecoratingTutorial" class="nav-item nav-link  h5 ms-2" id="foot" style="font-family: 'Suez One';">Decorating tutorials</a>
+
+        {% comment %} <a href="renderCart" class="nav-item nav-link h4 ms-3" id="foot">
+          <i class="bi bi-cart"></i> </a> {% endcomment %}
+          <div class="mt-1 ms-2 me-3">
+            <button class="btn btn-light border border-dark w-100 rounded-pill " onclick="ok()" id="foot">
+              <i class="fa fa-map-marker me-1" style="font-size: 18px;"></i>
+              Choose your delivery location
+            </button>
+          </div>
+      {% comment %} user profile {% endcomment %}
+      {% if user.is_authenticated %}
+      <li class="nav-item dropdown" id="profile">
+        <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user-circle ms-lg-2 mt-1" aria-hidden="true" style="color:#2E6565;font-size:20px"> Hello,<b>{{ request.user }}</b></i></a>
+        <div class="dropdown-menu">
+          <a href="renderMyOrders" class="dropdown-item">My Orders</a>
+          <a href="#" class="dropdown-item">My Account</a>
+          <a href="renderCart" class="dropdown-item">My Cart</a>
+          <a href="logout" class="dropdown-item">Logout</a>
+        </div>
+      </li>
+      {% else %}
+      <li class="nav-item dropdown" id="profile">
+        <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user-circle ms-lg-2 mt-1" aria-hidden="true" style="color:#2E6565;font-size:20px"> Hello, <b>Guest</b></i></a>
+        <div class="dropdown-menu">
+          <a href="logout" class="dropdown-item">Log Out</a>
+        </div>
+      </li>
+      {% endif %}
+      </div>
+
+    </div>
+  </nav>
+
+  <div id="container">
+    <div class="container">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+            <h2 class="mt-5 text-center" style="font-family: 'Suez One';">Birthday Decoration Ideas</h2>
+            <p style="font-family: 'Signika'">When it comes to birthdays, you don’t always want to spend an arm and a leg on decorations. And other times, you want something more personalized and unique to celebrate a loved one.</p>
+            <p style="font-family: 'Signika'">Whatever the case may be when you’re planning a birthday party, we recommend a bit of DIY work to get the festivities started off on the right foot.</p>
+            </div>
+            <div class="col-2"> </div>  
+        </div>
+    </div>
+  </div>
+
+  {% comment %} Tutorial video Display {% endcomment %}
+  <div class="container">
+    {% for x in video %}
+    <div class="row">
+        <div class="col-lg-6 mt-lg-5 ml-lg-5">
+           
+            <video
+                    id="my-video"
+                    class="video-js bg-light p-1 border-1"
+                    controls
+                    preload="auto"
+                    width="500"
+                    height="250"
+                    poster="{{ x.Video_Thumbnail.url }}"
+                    poste
+                    data-setup="{}" style="border-radius:15px 15px 15px 15px;">
+                    <source src="{{ x.Video_File.url }}" type="video/mp4"/>
+                </video><br>
+            
+        </div>
+        <div class="col-lg-4 mt-lg-5">
+            <ol>
+                <h1 style="font-family: 'Signika'">{{ x.Video_Title }}</h1>
+                <h6 style="font-family: 'Signika'">{{ x.Video_description }}</h6>
+            </ol>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+
+
+
+  
+
+
+  <footer class="shadow-lg" style="background-color: #d1e9e755;">
+    <div class="container p-4">
+      <div class="row">
+        <div class="col-lg-6 col-md-4 mb-4 mb-md-0">
+          <img src="{% static 'images/logo.png' %}" alt="not found" width="50%" class="ml-5">
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+          <ul class="list-unstyled mb-0">
+            <li>
+              <a href="#!" id="foot">Careers</a>
+            </li>
+            <li>
+              <a href="teach.html" id="foot">Our Services</a>
+            </li>
+            <li>
+              <a href="#!" id="foot">Get the app</a>
+            </li>
+            <li>
+              <a href="#!" id="foot">Contact us</a>
+            </li>
+            <li>
+              <a href="#!" id="foot">About us</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+          <ul class="list-unstyled">
+            <li>
+              <a href="#!" id="foot">Help and support</a>
+            </li>
+            <li>
+              <a href="#!" id="foot">Cookie settings</a>
+            </li>
+            <li>
+              <a href="#!" id="foot">Blog</a>
+            </li>
+            <li>
+              <a href="#!" id="foot">Terms</a>
+            </li>
+            <li>
+              <a href="#!" id="foot">Privacy policy</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+          <ul class="list-unstyled">
+            <li>
+              <a href="#!" id="foot">Help and support</a>
+            </li>
+            <li>
+              <a href="#!" id="foot">Cookie settings</a>
+            </li>
+            <li>
+              <a href="#!" id="foot">Blog</a>
+            </li>
+            <li>
+              <a href="#!" id="foot">Terms</a>
+            </li>
+            <li>
+              <a href="#!" id="foot">Privacy policy</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="container text-center" style="margin-left: 210px;">
+          <a href=""><i class="bi bi-whatsapp h1" id="foot"></i></a>
+          <a href=""><i class="bi bi-instagram h1 ms-3" id="foot"></i></a>
+          <a href=""><i class="bi bi-facebook h1 ms-3" id="foot"></i></a>
+          <a href=""><i class="bi bi-twitter h1 ms-3" id="foot"></i></a>
+      </div> -->
+    <div class="text-center p-3" id="foot">
+      © 2022 bakingbarons,inc
+    </div>
+  </footer>
+</div>
+</body>
+<script>
+  function ok(){
+      swal("Enter Your Pin Code", {
+    content: "input",
+  })
+  .then((value) => {
+    var res = parseInt(value)
+
+    var pincodelist = [411028, 411013, 411022, 100000, 412105, 411042, 411016, 412201, 412214, 411058]
+      for (let i = 0; i < pincodelist.length; i++) {
+        if (res == pincodelist[i]){
+          swal("Good News!", "We Deliver at "+res+"!", "success");
+          break;
+        }
+        else{
+          swal("Opps!", "We Dont Deliver at "+res+"!", "error");
+        }
+      }
+  })
+}
+</script>
+</html>
