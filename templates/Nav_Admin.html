@@ -1,0 +1,118 @@
+{% load static %}
+<link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://kit.fontawesome.com/ba9abb9f88.js" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <!-- <link rel="stylesheet" href="{% static 'css/admin.css' %}" /> -->
+
+    <!-- Vertical Nav bar -->
+    <div class="vertical-nav bg-white" id="sidebar">
+        <div class="py-4 px-3 mb-4 bg-light">
+          <div class="media d-flex align-items-center">
+            <a href="#"
+              ><img
+                src="{% static 'images/logo.png' %}"
+                alt="..."
+                width="180"
+                height="80"
+                class="mb-1 mt-2"
+            /></a>
+          </div>
+        </div>
+  
+        <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">
+          Dashboard
+        </p>
+  
+        <ul class="nav flex-column bg-white">
+          <li class="nav-item">
+            <a href="{% url 'dashboard' %}" class="nav-link bg-light">
+              <i class="fa-solid fa-house px-2 fa-xl py-3" style="color: #42929d;"></i>
+              Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="users" class="nav-link bg-light">
+              <i class="fa-solid fa-users px-2 fa-xl py-3" style="color: #42929d;"></i>
+              Users
+            </a>
+          </li>
+  
+          <li class="nav-item">
+            <a href="cakes" class="nav-link bg-light">
+              <i class="fa-solid fa-cake-candles px-2 fa-xl py-3" style="color: #42929d;"></i>
+              Cakes
+            </a>
+          </li>
+  
+          <li class="nav-item">
+            <a href="#" class="nav-link bg-light">
+              <i class="fa-solid fa-sort px-2 fa-xl py-3" style="color: #42929d;"></i>
+              Orders
+            </a>
+          </li>
+  
+          <li class="nav-item">
+            <a href="feedbacks" class="nav-link bg-light">
+              <i class="fa-solid fa-comments px-1 fa-xl py-3" style="color: #42929d;"></i>
+              Feedbacks
+            </a>
+          </li>
+  
+          <li class="nav-item">
+            <a href="tutorialVideo" class="nav-link bg-light">
+              <i class="fa-solid fa-film px-1 fa-xl py-3" style="color: #42929d;"></i>
+              Tutorial Video
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="logout" class="nav-link bg-light">
+              <i class="fa-solid fa-right-from-bracket px-2 fa-xl py-3" style="color: #42929d;"></i>
+              Logout
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- End of vertical NavBar -->
+  
+      <!-- Horizontal Navigation bar -->
+      <nav class="nav-container">
+        <div class="horizontal_nav bg-light pt-3 fixed-top" id="horizontalNav">
+          <ul class="nav mx-4">
+            <li class="nav-item">
+              <button
+                id="sidebarCollapse"
+                type="button"
+                class="btn btn-light bg-white rounded-pill shadow-sm border border-secondary px-3 mb-3"
+              >
+                <i class="fa fa-bars" style="font-size: 24px"></i>
+              </button>
+            </li>
+          </ul>
+  
+          <ul class="nav justify-content-end">
+              {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a href="" class="nav-link" style="font-family: Satoshi Variable;"><b>{{ request.user }}</b></a>
+        </li>
+  
+       
+        {% endif %}
+        </div>
+          </ul>
+        </div>
+      </nav>
+      <!-- End Horizontal Navigation bar -->

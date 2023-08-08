@@ -50,7 +50,7 @@ class Cart(models.Model):
     
 
 class Cakes(models.Model):
-    Cake_Image = models.FileField(max_length=1000)
+    Cake_Image = models.FileField()
     Cake_Name = models.CharField(max_length=1000)
     Cake_Price = models.IntegerField()
     Cake_Review = models.IntegerField()
