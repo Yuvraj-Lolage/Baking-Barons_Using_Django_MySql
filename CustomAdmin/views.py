@@ -102,3 +102,26 @@ def editCake(request, id):
     except Exception as e:
         messages.error(request, "Error in ")
     return redirect('/admin/cakes')
+
+
+def editUser(request, id):
+    userObj = User.objects.get(id = id)
+    isSuperUser = request.POST['isSuperUser']
+    isActiveUser = request.POST['isActiveUser']
+    
+    if isSuperUser == 'True':
+        userObj.is_superuser = 1
+    else:
+        userObj.is_superuser = 0
+            
+    if isActiveUser == 'True':
+        userObj.is_active = 1
+    else:
+        userObj.is_active = 0
+    
+    try:
+        userObj.save()    
+        messages.success(request,"User is Modified!")
+    except Exception as e:
+        messages.error(request,"User is not Modified!")
+    return redirect('/admin/users') 

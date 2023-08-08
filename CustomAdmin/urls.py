@@ -15,5 +15,7 @@ urlpatterns = [
     path('deleteTutorial/<int:id>', views.deleteTutorial, name='deleteTutorial'),
     path('addCake', views.addCake, name='addCake'),
     path('editCake/<int:id>', views.editCake, name='editCake'),
+    path('editUser/<int:id>', views.editUser, name='editUser'),
+    
     
 ]
