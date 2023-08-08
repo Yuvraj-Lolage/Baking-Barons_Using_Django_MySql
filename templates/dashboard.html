@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://kit.fontawesome.com/ba9abb9f88.js" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}" />
+    <title>Admin Dashboard</title>
+  </head>
+  <body>
+    {% include 'Nav_Admin.html' %}
+    <!-- Page Content -->
+    <div class="page-content px-5 pt-5" id="content" style="background-image: url({% static 'images/background.png' %}); background-size:cover; background-repeat:no-repeat">
+      <br><br>
+      {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <strong>Message: </strong>{{ message }}
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endfor %}
+      <!-- Demo Content -->
+      <div class="input-group my-4 pt-4">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search any Course"
+          aria-label="Recipient's username"
+          aria-describedby="button-addon2"
+        />
+        <button class="btn btn-primary" type="button" id="button-addon2">
+          <i class="fa fa-search pr-2"></i>search
+        </button>
+      </div>
+      <!-- <div class="separator"></div> -->
+
+      <h5 class="text-justify">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat qui
+        ipsam recusandae quasi odit! Alias reiciendis harum, odit quaerat ipsum
+        fuga. Nostrum esse ipsum earum ab qui hic magni, libero beatae
+        blanditiis in? Inventore ullam consectetur voluptatem perferendis fugiat
+        repudiandae consequatur. Ipsam error minima deleniti cum quod sapiente
+        incidunt est. Tenetur veritatis quae aperiam blanditiis quis accusamus
+        possimus sed excepturi odit ipsa magni impedit nam provident eveniet,
+        voluptatibus atque laborum, in voluptates iste! Tempore eius dolorum
+        nemo provident rem fugit nisi iste nam laboriosam, numquam consequuntur
+        esse facilis incidunt, doloremque cumque unde sed? Ipsam est, molestiae
+        quos at illum a.
+      </h5>
+    </div>
+    <!-- End demo content -->
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $(function(){
+        $('#sidebarCollapse').on('click', function(){
+            $('#sidebar, #content').toggleClass('active');
+            var marginLeft = parseInt($('#horizontalNav').css("margin-left"));
+            if(marginLeft >= 255){
+                $("#horizontalNav").css('margin-left', '0');
+                $("#horizontalNav").css('transition', '0.4s');
+            }
+            else if(marginLeft <= 0){
+                $("#horizontalNav").css('margin-left', '17rem');
+                $("#horizontalNav").css('transition', '0.4s');
+            }
+        });
+    });    
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

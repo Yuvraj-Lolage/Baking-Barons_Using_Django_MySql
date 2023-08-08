@@ -1,0 +1,219 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://kit.fontawesome.com/ba9abb9f88.js" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="{% static 'css/users.css' %}" />
+    <title>Cakes</title>
+  </head>
+  <body>
+    
+    {% include 'Nav_Admin.html' %}
+    
+    <!-- Page Content -->
+    <div class="page-content px-5 pt-5" id="content" style="background-image: url({% static 'images/background.png' %}); background-size:cover; background-repeat:no-repeat">
+      <!-- Demo Content -->
+      
+      <div class="pt-5">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            <strong>Message: </strong>{{ message }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="input-group my-4 pt-4">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search any Cake"
+          aria-label="Recipient's username"
+          aria-describedby="button-addon2"
+        />
+        <button class="btn btn-primary" type="button" id="button-addon2">
+          <i class="fa fa-search pr-2"></i>search
+        </button>
+      </div>
+      <!-- <div class="separator"></div> -->
+
+      <a class="btn btn-success text-center text-light" type="submit" data-toggle="modal" data-target="#Modal-0">Add cake</a>
+
+      {% comment %} Modal for adding Cake {% endcomment %}
+        <div class="modal fade" id="Modal-0" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-plus px-3" style="color: #292929;"></i><b>Add Cake</b></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <div class="container p-5">
+                 {% comment %} Form {% endcomment %}
+                  <form method="POST" action="addCake" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" class="btn btn-primary" value="Add Cake">
+                  </form>
+                  {% comment %} Form End {% endcomment %}
+              </div>
+
+            </div>
+          </div>
+        </div>
+      {% comment %} End of modal {% endcomment %}
+      <h1 class="text-center"><b>Cakes</b></h1>
+
+      <div class="container-fluid">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Sr No</th>
+                <th scope="col">Cake Name</th>
+                <th scope="col">Cake Flavour</th>
+                <th scope="col">price</th>
+                <th scope="col">Image</th>
+                <th scope="col">Category</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+
+              </tr>
+            </thead>
+            <tbody>
+                {% for cake in cakes %}
+              <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ cake.Cake_Name }}</td>
+                <td>{{ cake.Cake_Flavour }}</td>
+                <td>{{ cake.Cake_Price }}</td>
+                <td><img src="{{ cake.Cake_Image.url }}" width="40" alt="..."></td>
+
+                {% if cake.category == 1 %}<td>Birthday</td>{% endif %}
+                {% if cake.category == 2 %}<td>Anniversary</td>{% endif %}
+                {% if cake.category == 3 %}<td>Theme</td>{% endif %}
+                {% if cake.category == 4 %}<td>Cookie</td>{% endif %}
+                <td><a href="" type="button" class="btn btn-warning" data-toggle="modal" data-target="#Modal-{{ forloop.counter }}">edit</a></td>
+                
+                <!-- Modal -->
+                  <div class="modal fade" id="Modal-{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-user-edit px-3" style="color: #292929;"></i>Edit Cake</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <form method="POST" action="editCake/{{ cake.id }}" enctype="multipart/form-data"> 
+                          {% csrf_token %}
+                          <div class="modal-body">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text bg-info text-light" id="inputGroup-sizing-default">Cake Name</span>
+                            </div>
+                            <input type="text" class="form-control " value="{{ cake.Cake_Name }}" name="cakeName" required>
+                          </div>
+
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text bg-info text-light" id="inputGroup-sizing-default">Cake Flavour</span>
+                            </div>
+                            <input type="text" class="form-control" value="{{ cake.Cake_Flavour}}" name="cakeFlavour" required>
+                          </div>
+
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text bg-info text-light" id="inputGroup-sizing-default">Cake Price</span>
+                            </div>
+                            <input type="text" class="form-control" value="{{ cake.Cake_Price }}" name="cakePrice" required>
+                          </div>
+
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text bg-info text-light" id="inputGroup-sizing-default">Cake Review</span>
+                            </div>
+                            <input type="text" class="form-control" value="{{ cake.Cake_Review }}" name="cakeReview" required>
+                          </div>
+
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text bg-info text-light" id="inputGroup-sizing-default">Category</span>
+                            </div>
+                            <input type="text" class="form-control" value="{{ cake.category }}" name="cakeCategory" required>
+                          </div>
+
+                          <div class="input-group mb-3">
+                            <img src="{{ cake.Cake_Image.url }}" width="130" alt="...">
+                            <input type="file" class="form-control " name="Image" required>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <input type="submit" class="btn btn-primary text-light" value="Save changes">
+                        </div>
+                      </form>
+                      </div>
+                    </div>
+                  </div>
+
+                 </div>
+                  
+                <td><a href="deleteCake/{{ cake.id }}" type="button" class="btn btn-danger text-light">Delete</a></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+      </div>
+    </div>
+    <!-- End demo content -->
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $(function(){
+        $('#sidebarCollapse').on('click', function(){
+            $('#sidebar, #content').toggleClass('active');
+            var marginLeft = parseInt($('#horizontalNav').css("margin-left"));
+            if(marginLeft >= 255){
+                $("#horizontalNav").css('margin-left', '0');
+                $("#horizontalNav").css('transition', '0.4s');
+            }
+            else if(marginLeft <= 0){
+                $("#horizontalNav").css('margin-left', '17rem');
+                $("#horizontalNav").css('transition', '0.4s');
+            }
+        });
+    });    
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

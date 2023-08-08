@@ -1,0 +1,179 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://kit.fontawesome.com/ba9abb9f88.js" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="{% static 'css/users.css' %}" />
+    <title>Tutorial Videos</title>
+  </head>   
+  <body>
+    
+    {% include 'Nav_Admin.html' %}
+    <!-- Page Content -->
+    <div class="page-content px-5 pt-5" id="content" style="background-image: url({% static 'images/background.png' %}); background-size:cover; background-repeat:no-repeat">
+      <!-- Demo Content -->
+      <div class="input-group my-4 pt-4">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search any User"
+          aria-label="Recipient's username"
+          aria-describedby="button-addon2"
+        />
+        <button class="btn btn-primary" type="button" id="button-addon2">
+          <i class="fa fa-search pr-2"></i>search
+        </button>
+      </div>
+      <!-- <div class="separator"></div> -->
+
+      <h1 class="text-center"><b>Tutorial Videos</b></h1>
+
+      <div class="container-fluid">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Sr</th>
+                <th scope="col">Video Title</th>
+                <th scope="col">video Description</th>
+                <th scope="col">Media File</th>
+                <th scope="col">Thumbnail</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+
+              </tr>
+            </thead>
+            <tbody>
+                {% for tutorial in tutorials %}
+              <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ tutorial.Video_Title }}</td>
+                <td>{{ tutorial.Video_description}}</td>
+                <td><video
+                    id="my-video"
+                    class="video-js bg-light p-1 border-1"
+                    controls
+                    preload="auto"
+                    width="180"
+                    height="100"
+                    poster="{{ tutorial.Video_Thumbnail.url }}"
+                    poste
+                    data-setup="{}" style="border-radius:15px 15px 15px 15px;">
+                    <source src="{{ tutorial.Video_File.url }}" type="video/mp4"/>
+                </video></td>
+                <td><img src="{{ tutorial.Video_Thumbnail.url }}" width="200" alt="..." class="img-fluid"></td>
+                <td><a href="" type="button" class="btn btn-warning" data-toggle="modal" data-target="#Modal-{{ forloop.counter }}">edit</a></td>
+                <!-- Modal -->
+                  <div class="modal fade" id="Modal-{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-photo-film px-3" style="color: #292929;"></i></i>Edit Tutorial</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text " id="inputGroup-sizing-default">Video Title</span>
+                            </div>
+                            <input type="text" class="form-control" value="{{ tutorial.Video_Title }}">
+                          </div>
+
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="inputGroup-sizing-default">Video Description</span>
+                            </div>
+                            <textarea type="text" class="form-control" rows="10"> {{ tutorial.Video_description }}</textarea>
+                          </div>
+
+                          Media File<br>
+                          <div class="input-group mb-3">
+                            
+                            <video
+                                id="my-video"
+                                class="video-js bg-light p-1 border-1"
+                                controls
+                                preload="auto"
+                                width="180"
+                                height="100"
+                                poster="{{ tutorial.Video_Thumbnail.url }}"
+                                poste
+                                data-setup="{}" style="border-radius:15px 15px 15px 15px;">
+                                <source src="{{ tutorial.Video_File.url }}" type="video/mp4"/>
+                            </video>
+                            <input type="file" class="form-control ">
+                          </div>
+
+                          Thumbnail File<br>
+                          <div class="input-group mb-3">
+                            <img src="{{ tutorial.Video_Thumbnail.url }}" width="130" alt="...">
+                            <input type="file" class="form-control ">
+                          </div>
+
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <td><a href="deleteTutorial/{{ tutorial.id }}" type="button" class="btn btn-danger text-light">Delete</a></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+      </div>
+    </div>
+    <!-- End demo content -->
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $(function(){
+        $('#sidebarCollapse').on('click', function(){
+            $('#sidebar, #content').toggleClass('active');
+            var marginLeft = parseInt($('#horizontalNav').css("margin-left"));
+            if(marginLeft >= 255){
+                $("#horizontalNav").css('margin-left', '0');
+                $("#horizontalNav").css('transition', '0.4s');
+            }
+            else if(marginLeft <= 0){
+                $("#horizontalNav").css('margin-left', '17rem');
+                $("#horizontalNav").css('transition', '0.4s');
+            }
+        });
+    });    
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

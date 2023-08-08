@@ -1,0 +1,106 @@
+body{
+    font-family: Satoshi Variable;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+  
+  .vertical-nav{
+    padding-left: 20px;
+    min-width: 17rem;
+    width: 17rem;
+    height: 100vh;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s;
+  }
+  
+  .horizontal_nav{
+    margin-left: 17rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .page-content{
+    width: calc(100% - 17rem);
+    height: 100vh;
+    margin-left: 17rem;
+    transition: all 0.4s;
+  }
+  
+  #sidebar.active{
+    margin-left: -17rem;
+  }
+  
+  #content.active{
+    width: 100%;
+    margin-left: 0;
+  }
+  
+  .separator{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-bottom:1px dashed #000000 ;
+  }
+  
+  .text-uppercase{
+    letter-spacing: 0.1em;
+  }
+  
+  .text-gray{
+    color: #aaa;
+  }
+  
+  .nav-link{
+    text-transform: capitalize;
+    font-weight: 500;
+  }
+  
+  .nav-link:hover{
+    color: #FE6B8F;
+    background-color: #eaeaea;
+  }
+  .text-primary{
+    color: rgb(180, 70, 70);
+  }
+  
+  .btn-primary{
+    font-weight: 400;
+  }
+  
+  .card-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .card{
+    margin:1rem;
+  }
+
+
+  
+  @media (max-width:768px){
+    #sidebar{
+      margin-left: -17rem;
+    }
+  
+    #sidebar.active{
+      margin-left: 0;
+    }
+  
+    #content{
+      width: 100%;
+      margin: 0;
+    }
+  
+    #content.active{
+      margin-left: 17rem;
+      width: calc(100% - 17rem);
+    }
+  
+    .horizontal_nav{
+      margin: 0;
+    }
+  }
