@@ -30,6 +30,14 @@
     <!-- Page Content -->
     <div class="page-content px-5 pt-5" id="content" style="background-image: url({% static 'images/background.png' %}); background-size:cover; background-repeat:no-repeat">
       <!-- Demo Content -->
+      <div class="pt-5">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            <strong>Message: </strong>{{ message }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+        {% endfor %}
+      </div>
       <div class="input-group my-4 pt-4">
         <input
           type="text"
@@ -43,7 +51,33 @@
         </button>
       </div>
       <!-- <div class="separator"></div> -->
+      <a class="btn btn-success text-center text-light" type="submit" data-toggle="modal" data-target="#Modal-0">Add Tutorial Video</a>
 
+      {% comment %} Modal for adding Cake {% endcomment %}
+        <div class="modal fade" id="Modal-0" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-plus px-3" style="color: #292929;"></i><b>Add Tutorial Video</b></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <div class="container p-5">
+                 {% comment %} Form {% endcomment %}
+                  <form method="POST" action="addtutorialvideo" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" class="btn btn-primary" value="Add Tutorial Video">
+                  </form>
+                  {% comment %} Form End {% endcomment %}
+              </div>
+
+            </div>
+          </div>
+        </div>
+      {% comment %} End of modal {% endcomment %}
       <h1 class="text-center"><b>Tutorial Videos</b></h1>
 
       <div class="container-fluid">
@@ -90,19 +124,24 @@
                             <span aria-hidden="true">&times;</span>
                           </button>
                         </div>
+
+
+                      {% comment %} Form {% endcomment %}
+                      <form method="POST" action="edittutorial/{{ tutorial.id }}" enctype="multipart/form-data">
+                        {% csrf_token %}  
                         <div class="modal-body">
                           <div class="input-group mb-3">
                             <div class="input-group-prepend">
                               <span class="input-group-text " id="inputGroup-sizing-default">Video Title</span>
                             </div>
-                            <input type="text" class="form-control" value="{{ tutorial.Video_Title }}">
+                            <input type="text" name="title" class="form-control" value="{{ tutorial.Video_Title }} " required>
                           </div>
 
                           <div class="input-group mb-3">
                             <div class="input-group-prepend">
                               <span class="input-group-text" id="inputGroup-sizing-default">Video Description</span>
                             </div>
-                            <textarea type="text" class="form-control" rows="10"> {{ tutorial.Video_description }}</textarea>
+                            <textarea type="text" name="description" class="form-control" rows="10" required> {{ tutorial.Video_description }}</textarea>
                           </div>
 
                           Media File<br>
@@ -120,20 +159,22 @@
                                 data-setup="{}" style="border-radius:15px 15px 15px 15px;">
                                 <source src="{{ tutorial.Video_File.url }}" type="video/mp4"/>
                             </video>
-                            <input type="file" class="form-control ">
+                            <input type="file" name="videoFile" class="form-control " required>
                           </div>
 
                           Thumbnail File<br>
                           <div class="input-group mb-3">
                             <img src="{{ tutorial.Video_Thumbnail.url }}" width="130" alt="...">
-                            <input type="file" class="form-control ">
+                            <input type="file" name="thumbnaiImage" class="form-control " required>
                           </div>
 
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
+                          <input type="submit" class="btn btn-primary" value="Add Tutorial Video">
+                        </div>  
+                    </form>
+                    {% comment %} Form End {% endcomment %}
                       </div>
                     </div>
                   </div>

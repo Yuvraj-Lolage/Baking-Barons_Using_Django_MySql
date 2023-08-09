@@ -16,6 +16,8 @@ urlpatterns = [
     path('addCake', views.addCake, name='addCake'),
     path('editCake/<int:id>', views.editCake, name='editCake'),
     path('editUser/<int:id>', views.editUser, name='editUser'),
+    path('addtutorialvideo', views.addTutorialVideo, name='addtutorialvideo'),
+    path('edittutorial/<int:id>', views.editTutorialVideo, name='edittutorial'),
     
     
 ]
