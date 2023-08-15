@@ -1,0 +1,126 @@
+#foot{
+    text-decoration:none; 
+    color: #2E6565;
+    font-family: 'Suez One', sans-serif;
+}
+#img{
+ position:absolute;
+ width: 52%;
+bottom: 1px;
+top: 55px;
+right: 700px;
+}
+#btn2{
+    background: linear-gradient(to bottom right,#ff8800ab,#ff0077a8);
+    font-size: 20px;
+    color: white;
+    margin-left: 150px;
+    border-radius: 10px;
+    font-family: 'Signika'
+}
+#btn{
+    background: linear-gradient(to bottom right,#ff8800d5,#ff0040bf);
+    border-radius: 10px;
+    font-family: 'Signika'
+}
+#form{
+    border-radius: 15px;
+    height: 36pt;
+}
+#search{
+    width: 450px;
+}
+#nav{
+    background-color: #d1e9e755;
+    font-family: 'Suez One', sans-serif;
+}
+#container{
+    background-image: url("background.png");
+    background-size: 100%;
+}
+body{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-size: 100%;
+    
+}
+
+#btncss{
+    background: linear-gradient(to bottom right,#ff8800d5,#ff0040bf);
+    border-radius: 10px;
+}
+
+#trans{
+    /* background-color: #28d9e273; */
+    background: linear-gradient(to bottom right,#ff007752,#28c6e243);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 25px;
+    padding-bottom: 25pt;
+
+}
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css");
+.track_tbl td.track_dot {
+    width: 50px;
+    position: absolute;
+    padding: 0;
+    text-align: center;
+}
+.track_tbl td.track_dot:after {
+    content: "\f111";
+    font-family: FontAwesome;
+    position: absolute;
+    margin-left: -5px;
+    top: 11px;
+}
+.track_tbl td.track_dot span.track_line {
+    background: #000;
+    width: 3px;
+    min-height: 50px;
+    position: absolute;
+    height: 101%;
+}
+.track_tbl tbody tr:first-child td.track_dot span.track_line {
+    top: 30px;
+    min-height: 25px;
+}
+.track_tbl tbody tr:last-child td.track_dot span.track_line {
+    top: 0;
+    min-height: 25px;
+    height: 10%;
+}
+
+.dropdown-menu li {
+    position: relative;
+    }
+    .dropdown-menu .dropdown-submenu {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: -7px;
+    }
+    .dropdown-menu .dropdown-submenu-left {
+    right: 100%;
+    left: auto;
+    }
+    .dropdown-menu > li:hover > .dropdown-submenu {
+    display: block;
+    }
+
+
+#descbtn{
+        background: linear-gradient(to bottom right,#ff8800ab,#ff0077a8);
+        border: none;
+        color: #fff;
+    }
+
+#navItem{
+    font-family: 'Suez One';
+}
+
+#ratingDiv{
+    background: linear-gradient(to bottom right,#ff007752,#28c6e243);   
+    width: auto;
+    height: 250px;
+    overflow: scroll;
+    border-radius: 19px;
+}
